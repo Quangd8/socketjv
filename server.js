@@ -20,7 +20,7 @@ net.createServer(function (socket) {
   // Handle incoming messages from clients.
   socket.on('data', function (data) {
     console.log('Data socket', data)
-    console.log('Test ', Buffer.isisBuffer(data))
+    console.log('Test ', Buffer.isBuffer(data))
   });
 
   // Remove the client from the list when it leaves
