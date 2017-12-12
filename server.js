@@ -15,29 +15,31 @@ net.createServer(function (socket) {
 
   // Send a nice welcome message and announce
   socket.write("Welcome " + socket.name + "\n");
-  broadcast(socket.name + " joined the chat\n", socket);
+  // broadcast(socket.name + " joined the chat\n", socket);
 
   // Handle incoming messages from clients.
   socket.on('data', function (data) {
-    broadcast(socket.name + "> " + data, socket);
+    console.log('Data socket', data)
+    console.log('Test ', Buffer.isisBuffer(data))
   });
 
   // Remove the client from the list when it leaves
   socket.on('end', function () {
     clients.splice(clients.indexOf(socket), 1);
-    broadcast(socket.name + " left the chat.\n");
+    console.log('Data socket \(socket.name)')
+    // broadcast(socket.name + " left the chat.\n");
   });
 
   // Send a message to all clients
-  function broadcast(message, sender) {
-    clients.forEach(function (client) {
-      // Don't want to send it to sender
-      if (client === sender) return;
-      client.write(message);
-    });
-    // Log it to the server output too
-    process.stdout.write(message)
-  }
+  // function broadcast(message, sender) {
+  //   clients.forEach(function (client) {
+  //     // Don't want to send it to sender
+  //     if (client === sender) return;
+  //     client.write(message);
+  //   });
+  //   // Log it to the server output too
+  //   process.stdout.write(message)
+  // }
 
 }).listen(6000);
 
