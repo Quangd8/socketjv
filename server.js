@@ -21,14 +21,38 @@ net.createServer(function (socket) {
   socket.on('data', function (data) {
     console.log('Data buffer', data)
     console.log('Data length ', Buffer.byteLength(data))
-    if (data[0] == 0x78) {
-      console.log('Dung roi do mai')
-    } else {
-      console.log('test', data[0])
+    const packetLength = data[2]
+    const protocolNumber = data[3]
+    switch (protocolNumber) {
+      case 0x01:
+        console.log('Login message')
+        break;
+      case 0x22:
+        console.log('Location Data (UTC)')
+        break;
+      case 0x13:
+        console.log('Status information')
+        break;
+      case 0x21:
+        console.log('String information')
+        break;
+      case 0x26:
+        console.log('Alarm data')
+        break;
+      case 0x27:
+        console.log('Time zone and time')
+        break;
+      case 0x2A:
+        console.log('GPS, query address information by phone number')
+        break;
+      case 0x80:
+        console.log('Command information sent by the server to the terminal')
+        break;
+      default:
+        console.log('Unrecognized data')
+        break;
     }
 
-    // socket.write(data)
-    // const buf = Buffer.from([0x78 0x78, 0x66, 0x66, 0x0D, 0x0A])
   });
 
   // Remove the client from the list when it leaves
