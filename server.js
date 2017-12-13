@@ -21,12 +21,18 @@ net.createServer(function (socket) {
   socket.on('data', function (data) {
     console.log('Data socket', data)
     console.log('Test ', Buffer.isBuffer(data))
+    console.log('Test data read uint ', data.readUInt8(0))
   });
 
   // Remove the client from the list when it leaves
   socket.on('end', function () {
     clients.splice(clients.indexOf(socket), 1);
-    console.log('Data socket \(socket.name)')
+    console.log('Data socket end ')
+    // broadcast(socket.name + " left the chat.\n");
+  });
+
+  socket.on('error', function (error) {
+    console.error('Socket error ', error)
     // broadcast(socket.name + " left the chat.\n");
   });
 
