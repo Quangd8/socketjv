@@ -20,7 +20,7 @@ net.createServer(function (socket) {
   // Handle incoming messages from clients.
   socket.on('data', function (data) {
     console.log('Data buffer', data)
-    console.log('Data length ', Buffer.byteLength(data)))
+    console.log('Data length ', Buffer.byteLength(data))
     client.write(data)
     // const buf = Buffer.from([0x78 0x78, 0x66, 0x66, 0x0D, 0x0A])
   });
