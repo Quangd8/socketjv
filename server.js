@@ -22,6 +22,7 @@ net.createServer(function (socket) {
     console.log('Data socket', data)
     console.log('Test ', Buffer.isBuffer(data))
     console.log('Test data read uint ', data.readUInt8(0))
+    console.log('Test data read uint16 ', data.readUInt16(0))
   });
 
   // Remove the client from the list when it leaves
