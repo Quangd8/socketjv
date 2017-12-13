@@ -21,7 +21,13 @@ net.createServer(function (socket) {
   socket.on('data', function (data) {
     console.log('Data buffer', data)
     console.log('Data length ', Buffer.byteLength(data))
-    socket.write(data)
+    if (data[0] == 0x78) {
+      console.log('Dung roi do mai')
+    } else {
+      console.log('test', data[0])
+    }
+
+    // socket.write(data)
     // const buf = Buffer.from([0x78 0x78, 0x66, 0x66, 0x0D, 0x0A])
   });
 
