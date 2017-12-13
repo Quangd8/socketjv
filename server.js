@@ -14,17 +14,15 @@ net.createServer(function (socket) {
   clients.push(socket);
 
   // Send a nice welcome message and announce
-  socket.write("Welcome " + socket.name + "\n");
+  // socket.write("Welcome " + socket.name + "\n");
   // broadcast(socket.name + " joined the chat\n", socket);
 
   // Handle incoming messages from clients.
   socket.on('data', function (data) {
-    console.log('Data socket', data)
-    console.log('Test ', Buffer.isBuffer(data))
-    console.log('Test data read uint ', data.readUInt8(0))
-    const id = data.slice(4,8)
-    const msg = data.toString()
-    console.log('test thu coi', msg)
+    console.log('Data buffer', data)
+    console.log('Data length ', Buffer.byteLength(data)))
+    client.write(data)
+    // const buf = Buffer.from([0x78 0x78, 0x66, 0x66, 0x0D, 0x0A])
   });
 
   // Remove the client from the list when it leaves
