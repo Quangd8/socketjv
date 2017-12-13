@@ -23,7 +23,7 @@ net.createServer(function (socket) {
     console.log('Test ', Buffer.isBuffer(data))
     console.log('Test data read uint ', data.readUInt8(0))
     const id = data.slice(4,8)
-    const msg = data..toString()
+    const msg = data.toString()
     console.log('test thu coi', msg)
   });
 
