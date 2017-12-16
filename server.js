@@ -13,15 +13,14 @@ net.createServer(function (socket) {
   // Put this new client in the list
   clients.push(socket);
 
-  // Send a nice welcome message and announce
-  // socket.write("Welcome " + socket.name + "\n");
-  // broadcast(socket.name + " joined the chat\n", socket);
-
   // Handle incoming messages from clients.
   socket.on('data', function (data) {
     console.log('Data buffer', data)
     console.log('Data length ', Buffer.byteLength(data))
+    console.log(data.toString('utf16le'))
     const packetLength = data[2]
+    console.log('Data content length', packetLength)
+    console.log('Test data length', parseInt( '' + packetLength, 16))
     const protocolNumber = data[3]
     switch (protocolNumber) {
       case 0x01:
@@ -79,6 +78,7 @@ net.createServer(function (socket) {
   // }
 
 }).listen(6000);
+
 
 // Put a friendly message on the terminal of the server.
 console.log("Chat server running at port 6000\n");
